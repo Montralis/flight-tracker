@@ -42,7 +42,7 @@ func fetchFlightPlan(url string) (*FlightInfo, error) {
 
 	var query QueryResponse
 	if err := json.Unmarshal(body, &query); err != nil {
-		return nil, err
+		return nil, nil
 	}
 
 	return &query.Response.FlightRoute, nil
