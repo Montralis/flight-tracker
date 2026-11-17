@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log/slog"
 	"math"
 	"net/http"
 	"os"
@@ -13,7 +14,6 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/paulmach/orb"
 	"github.com/paulmach/orb/planar"
-	"golang.org/x/exp/slog"
 )
 
 type Track struct {
