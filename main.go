@@ -54,7 +54,7 @@ func flightsInSquare(writer http.ResponseWriter, request *http.Request) {
 		cLat, cLon, dist,
 	)
 
-	var TrackStore []Track
+	var TrackStore = make([]Track, 0)
 
 	aircrafts, err := fetchAircraftData(url)
 	if err != nil {
@@ -114,7 +114,7 @@ func flightsInCircle(writer http.ResponseWriter, request *http.Request) {
 		lat, lon, dist,
 	)
 
-	var TrackStore []Track
+	var TrackStore = make([]Track, 0)
 
 	aircrafts, err := fetchAircraftData(url)
 	if err != nil {
