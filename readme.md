@@ -47,13 +47,13 @@ http://localhost:8080
 **Linux ARM64:**
 
 ```bash
-GOOS=linux GOARCH=arm64 go build -o Flight_Tracker_ARM64 ./src
+GOOS=linux GOARCH=arm64 go build -trimpath -ldflags="-s -w" -o Flight_Tracker_ARM64 ./src
 ```
 
 **Linux AMD64 (x64):**
 
 ```bash
-GOOS=linux GOARCH=amd64 go build -o Flight_Tracker_AMD64 ./src
+GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w" -o Flight_Tracker_AMD64 ./src
 ```
 
 ## API Endpoints

@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type QueryResponse struct {
+type FlightplanQueryResponse struct {
 	Response FlightRoute `json:"response"`
 }
 
@@ -36,11 +36,12 @@ func fetchFlightPlan(url string) (*FlightInfo, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer resp.Body.Close()
 
 	body, _ := io.ReadAll(resp.Body)
 
-	var query QueryResponse
+	var query FlightplanQueryResponse
 	if err := json.Unmarshal(body, &query); err != nil {
 		return nil, nil
 	}
