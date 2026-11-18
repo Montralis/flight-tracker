@@ -1,0 +1,17 @@
+[Unit]
+Description=Flight Tracker (%i)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+User=%i
+WorkingDirectory=/home/%i/flight-tracker
+ExecStart=/home/%i/flight-tracker/Flight_Tracker_ARM64
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
