@@ -34,10 +34,7 @@ func flightsInSquare(writer http.ResponseWriter, request *http.Request) {
 	latDist := (ul - ll) * 60
 	lonDist := (ur - lr) * 60 * math.Cos(cLat*math.Pi/180)
 
-	dist := math.Sqrt(
-		math.Pow(latDist/2, 2) +
-			math.Pow(lonDist/2, 2),
-	)
+	dist := math.Sqrt(math.Pow(latDist/2, 2) + math.Pow(lonDist/2, 2))
 
 	polygon := orb.Polygon{
 		{
@@ -54,9 +51,9 @@ func flightsInSquare(writer http.ResponseWriter, request *http.Request) {
 		cLat, cLon, dist,
 	)
 
-	var TrackStore = make([]Track, 0)
-
 	aircrafts, err := fetchAircraftData(url)
+	var TrackStore = make([]Track, 0, len(aircrafts))
+
 	if err != nil {
 		slog.Error("Error while fetching aircraft data", "err", err)
 		http.Error(writer, "Failed to fetch aircraft", http.StatusInternalServerError)
@@ -114,9 +111,9 @@ func flightsInCircle(writer http.ResponseWriter, request *http.Request) {
 		lat, lon, dist,
 	)
 
-	var TrackStore = make([]Track, 0)
-
 	aircrafts, err := fetchAircraftData(url)
+	var TrackStore = make([]Track, 0, len(aircrafts))
+
 	if err != nil {
 		slog.Error("Error while fetching aircraft data", "err", err)
 		http.Error(writer, "Failed to fetch aircraft", http.StatusInternalServerError)
@@ -135,7 +132,7 @@ func flightsInCircle(writer http.ResponseWriter, request *http.Request) {
 			return
 		}
 
-		if flightPlan != nil {
+		if flightPlan != nil && flightPlan.Destination.IATA != "" && flightPlan.Origin.IATA != "" {
 			TrackStore = append(TrackStore, Track{
 				Aircraft: aircraft.Type,
 				Callsign: aircraft.Callsign,
